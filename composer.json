@@ -1,0 +1,34 @@
+{
+    "name": "campaignchain/activity-ezplatform",
+    "description": "Schedule content managed inside eZ Platform as part of a CampaignChain campaign.",
+    "keywords": ["campaignchain"],
+    "type": "campaignchain-activity",
+    "license": "Apache-2.0",
+    "homepage": "http://www.campaignchain.com",
+    "authors": [
+        {
+            "name": "CampaignChain, Inc.",
+            "email": "info@campaignchain.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": { "CampaignChain\\Activity\\EZPlatformBundle\\": "" }
+    },
+    "extra": {
+        "campaignchain": {
+            "kernel": {
+                "classes": [
+                    "CampaignChain\\Activity\\EZPlatformBundle\\CampaignChainActivityEZPlatformBundle"
+                ],
+                "routing":
+                {
+                    "name": "campaignchain_activity_ezplatform",
+                    "resource": "@CampaignChainActivityEZPlatformBundle/Resources/config/routing.yml",
+                    "prefix": "/"
+                }
+            }
+        }
+    }
+}

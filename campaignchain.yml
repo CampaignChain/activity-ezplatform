@@ -1,0 +1,17 @@
+
+modules:
+    campaignchain-ezplatform-schedule:
+        display_name: Schedule eZ Platform content
+        description: Schedule content managed inside eZ Platform as part of a CampaignChain campaign.
+        channels: 
+            - campaignchain/channel-ezplatform/campaignchain-ezplatform
+        routes: 
+            new: campaignchain_activity_ezplatform_schedule_new
+            edit: campaignchain_activity_ezplatform_schedule_edit
+            edit_modal: campaignchain_activity_ezplatform_schedule_edit_modal
+            edit_api: campaignchain_activity_ezplatform_schedule_edit_api
+            read: campaignchain_activity_ezplatform_schedule_read
+        hooks:
+            default:
+                campaignchain-due: true
+                campaignchain-assignee: true

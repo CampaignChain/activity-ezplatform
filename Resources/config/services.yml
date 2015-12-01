@@ -1,0 +1,35 @@
+# This file is part of the CampaignChain package.
+#
+# (c) CampaignChain, Inc. <info@campaignchain.com>
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+# Parameters for the CampaignChain Activity modules in this Symfony bundle
+    campaignchain.activity.campaignchain.ezplatform.schedule:
+        bundle_name: "campaignchain/activity-ezplatform"
+        module_identifier: "campaignchain-ezplatform-schedule"
+        location: %campaignchain.location.campaignchain.ezplatform.object%
+        equals_operation: true
+        operations:
+            - %campaignchain.operation.campaignchain.ezplatform.schedule%
+        handler: "campaignchain.activity.controller.handler.campaignchain.ezplatform.schedule"
+
+services:
+    # The Symfony service evoking the default controller of the CampaignChain
+    # core package
+    campaignchain.activity.controller.campaignchain.ezplatform.schedule:
+        class: CampaignChain\CoreBundle\Controller\Module\ActivityModuleController
+        calls:
+            - [setContainer, ["@service_container"]]
+            - [setParameters, ["%campaignchain.activity.campaignchain.ezplatform.schedule%"]]
+    # The CampaignChain controller handler where the Activity's GUI and data
+    # is being processed.
+    campaignchain.activity.controller.handler.campaignchain.ezplatform.schedule:
+        class: CampaignChain\Activity\EZPlatformBundle\Controller\EZPlatformScheduleHandler
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@session"
+            - "@templating"
+            - "@campaignchain.channel.ezplatform.rest.client"
