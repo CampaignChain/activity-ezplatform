@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "campaignchain/channel-ezplatform": "dev-master",
+        "campaignchain/location-ezplatform": "dev-master",
         "campaignchain/operation-ezplatform": "dev-master"
     },
     "autoload": {
