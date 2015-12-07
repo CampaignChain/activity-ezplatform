@@ -310,6 +310,12 @@ class EZPlatformScheduleHandler extends AbstractActivityHandler
      */
     public function hasContent($view)
     {
+        switch($view){
+            case 'rest':
+                return false;
+                break;
+        }
+
         return true;
     }
 

@@ -26,3 +26,9 @@ campaignchain_activity_ezplatform_schedule_edit_api:
 campaignchain_activity_ezplatform_schedule_read:
     pattern: /activity/ezplatform/schedule/{id}
     defaults: { _controller: campaignchain.activity.controller.campaignchain.ezplatform.schedule:readAction }
+
+# REST routes are being created automatically via FOSRestBundle.
+campaignchain_activity_ezplatform_rest:
+    type:     rest
+    prefix:   /api/{version}/p/campaignchain/activity-ezplatform
+    resource: CampaignChain\Activity\EZPlatformBundle\Controller\REST\ActivityController
