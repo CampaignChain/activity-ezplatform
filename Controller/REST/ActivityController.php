@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Request\ParamFetcher;
+use Symfony\Component\HttpFoundation\Response;
 
 class ActivityController extends BaseController
 {
@@ -56,34 +57,36 @@ class ActivityController extends BaseController
      */
     public function scheduleObjectsAction(Request $request)
     {
-        $data = array(
-            'campaignchain_core_channel' => array(
-                'campaignchain_core_location' => array(
-                    'id' => 107,
-                )
-            ),
-            'campaignchain_core_campaign' => array(
-                'id' => 1,
-            ),
-            'campaignchain_core_activity' => array(
-                'name' => 'About eZ',
-                'campaignchain_hook_campaignchain_due' => array(
-                    'date' => '2015-12-20T12:00:00+0000', // Throw error if not within campaign duration.
-                ),
-                'campaignchain_hook_campaignchain_assignee' => array(
-                    'user' => 1,
-                )
-            )
-        );
+//        $data = array(
+//            'campaignchain_core_channel' => array(
+//                'campaignchain_core_location' => array(
+//                    'id' => 100,
+//                )
+//            ),
+//            'campaignchain_core_campaign' => array(
+//                'id' => 1,
+//            ),
+//            'campaignchain_core_activity' => array(
+//                'name' => 'About eZ',
+//                'campaignchain_hook_campaignchain_due' => array(
+//                    'date' => '2015-12-20T12:00:00+0000', // Throw error if not within campaign duration.
+//                ),
+//                'campaignchain_hook_campaignchain_assignee' => array(
+//                    'user' => 1,
+//                )
+//            )
+//        );
 
         try {
+            $data = json_decode($request->getContent());
+
             // Get the Channel object.
             $locationService = $this->get('campaignchain.core.location');
-            $location = $locationService->getLocation($data['campaignchain_core_channel']['campaignchain_core_location']['id']);
+            $location = $locationService->getLocation($data->campaignchain_core_channel->campaignchain_core_location->id);
 
             // Get the Campaign object.
             $campaignService = $this->get('campaignchain.core.campaign');
-            $campaign = $campaignService->getCampaign($data['campaignchain_core_campaign']['id']);
+            $campaign = $campaignService->getCampaign($data->campaignchain_core_campaign->id);
 
             $activityModuleService = $this->get(
                 'campaignchain.activity.controller.campaignchain.ezplatform.schedule'
@@ -92,7 +95,7 @@ class ActivityController extends BaseController
             $activityModuleService->setActivityContext($campaign, $location);
 
             $activity = new Activity();
-            $activity->setName($data['campaignchain_core_activity']['name']);
+            $activity->setName($data->campaignchain_core_activity->name);
 
             $form = $this->createForm(
                 $activityModuleService->getActivityFormType('rest'), $activity
@@ -103,18 +106,19 @@ class ActivityController extends BaseController
             if ($form->isValid()) {
                 $activity = $activityModuleService->createActivity($activity, $form);
 
-                $qb = $this->getQueryBuilder();
-                $qb->select('a');
-                $qb->from('CampaignChain\CoreBundle\Entity\Activity', 'a');
-                $qb->where('a.id = :activity');
-                $qb->setParameter('activity', $activity);
-                $query = $qb->getQuery();
-
-                $activity = $query->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-
-                return $this->response(
-                    $activity
+                $routeOptions = array(
+                    'id' => $activity->getId(),
+                    'version' => 'v1',
+                    '_format' => $request->get('_format')
                 );
+
+                $view = $this->routeRedirectView(
+                    'campaignchain_core_rest_activity_get_activities_activity',
+                    $routeOptions,
+                    Response::HTTP_CREATED
+                );
+                //print_r($routeOptions);die();
+                return $this->handleView($view);
             } else {
                 return $this->errorResponse(
                     $form
@@ -122,7 +126,7 @@ class ActivityController extends BaseController
             }
         } catch (\Exception $e) {
             throw new \Exception($e);
-            return $this->errorResponse($e->getMessage(), $e->getCode());
+            //return $this->errorResponse($e->getMessage(), $e->getCode());
         }
     }
 }
