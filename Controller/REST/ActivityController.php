@@ -101,7 +101,7 @@ class ActivityController extends BaseController
                 $activityModuleService->getActivityFormType('rest'), $activity
             );
 
-            $form->submit($request);
+            $form->handleRequest($request);
 
             if ($form->isValid()) {
                 $activity = $activityModuleService->createActivity($activity, $form);
