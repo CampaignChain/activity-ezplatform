@@ -125,8 +125,7 @@ class ActivityController extends BaseController
                 );
             }
         } catch (\Exception $e) {
-            throw new \Exception($e);
-            //return $this->errorResponse($e->getMessage(), $e->getCode());
+            return $this->errorResponse($e->getMessage(), $e->getCode());
         }
     }
 }
