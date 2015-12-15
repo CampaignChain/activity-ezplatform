@@ -29,6 +29,5 @@ campaignchain_activity_ezplatform_schedule_read:
 
 # REST routes are being created automatically via FOSRestBundle.
 campaignchain_activity_ezplatform_rest:
-    type:     rest
-    prefix:   /api/{version}/p/campaignchain/activity-ezplatform
-    resource: CampaignChain\Activity\EZPlatformBundle\Controller\REST\ActivityController
+    resource: "@CampaignChainActivityEZPlatformBundle/Resources/config/routing_rest.yml"
+    prefix: /api/v1/p/campaignchain/activity-ezplatform
