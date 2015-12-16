@@ -122,35 +122,9 @@ class ActivityController extends BaseModuleController
      * Example Response
      * ================
      *
-    [
-        {
-            "location": {
-                "id": 142,
-                "name": "My eZ Platform object",
-                "status": "unpublished",
-                "createdDate": "2015-12-15T15:01:13+0000"
-            }
-        },
-        {
-            "activity": {
-                "id": 42,
-                "equalsOperation": true,
-                "name": "My eZ Platform object",
-                "startDate": "2015-12-20T12:00:00+0000",
-                "status": "open",
-                "createdDate": "2015-12-15T15:01:13+0000"
-            }
-        },
-        {
-            "operation": {
-                "id": 127,
-                "name": "My eZ Platform object",
-                "startDate": "2015-12-20T12:00:00+0000",
-                "status": "open",
-                "createdDate": "2015-12-15T15:01:13+0000"
-            }
-        }
-    ]
+     * See:
+     *
+     *      GET /api/v1/p/campaignchain/activity-ezplatform/objects/{id}
      *
      * @ApiDoc(
      *  section="Packages: eZ Platform"
