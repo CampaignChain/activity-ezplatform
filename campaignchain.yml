@@ -11,6 +11,8 @@ modules:
             edit_modal: campaignchain_activity_ezplatform_schedule_edit_modal
             edit_api: campaignchain_activity_ezplatform_schedule_edit_api
             read: campaignchain_activity_ezplatform_schedule_read
+        services:
+            handler: campaignchain.activity.controller.handler.campaignchain.ezplatform.schedule
         hooks:
             default:
                 campaignchain-due: true
