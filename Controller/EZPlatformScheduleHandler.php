@@ -24,7 +24,7 @@ use CampaignChain\CoreBundle\Entity\Location;
 use CampaignChain\CoreBundle\Entity\Campaign;
 use CampaignChain\CoreBundle\Entity\Activity;
 use CampaignChain\CoreBundle\Entity\Operation;
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -41,13 +41,13 @@ class EZPlatformScheduleHandler extends AbstractActivityHandler
     private   $restApiConnection;
 
     public function __construct(
-        EntityManager $em,
+        ManagerRegistry $managerRegistry,
         Session $session,
         TwigEngine $templating,
         EZPlatformClient $restClient
     )
     {
-        $this->em = $em;
+        $this->em = $managerRegistry->getManager();
         $this->session = $session;
         $this->templating = $templating;
         $this->restClient = $restClient;
