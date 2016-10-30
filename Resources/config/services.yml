@@ -36,7 +36,7 @@ services:
     campaignchain.activity.controller.handler.campaignchain.ezplatform.schedule:
         class: CampaignChain\Activity\EZPlatformBundle\Controller\EZPlatformScheduleHandler
         arguments:
-            - "@doctrine.orm.entity_manager"
+            - "@doctrine"
             - "@session"
             - "@templating"
             - "@campaignchain.channel.ezplatform.rest.client"
