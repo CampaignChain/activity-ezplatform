@@ -184,9 +184,10 @@ class EZPlatformScheduleHandler extends AbstractActivityHandler
      * - read
      *
      * @param Operation $operation
+     * @param bool $isModal Modal view yes or no?
      * @return mixed
      */
-    public function readAction(Operation $operation)
+    public function readAction(Operation $operation, $isModal = false)
     {
     }
 
