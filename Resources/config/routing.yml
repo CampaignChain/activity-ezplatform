@@ -13,29 +13,29 @@
 # limitations under the License.
 
 campaignchain_activity_ezplatform_schedule_new:
-    pattern: /activity/ezplatform/schedule/new
+    path: /activity/ezplatform/schedule/new
     defaults: { _controller: campaignchain.activity.controller.campaignchain.ezplatform.schedule:newAction }
 
 campaignchain_activity_ezplatform_schedule_edit:
-    pattern: /activity/ezplatform/schedule/{id}/edit
+    path: /activity/ezplatform/schedule/{id}/edit
     defaults: { _controller: campaignchain.activity.controller.campaignchain.ezplatform.schedule:editAction }
 
 campaignchain_activity_ezplatform_schedule_edit_modal:
-    pattern: /modal/activity/ezplatform/schedule/{id}/edit
+    path: /modal/activity/ezplatform/schedule/{id}/edit
     defaults: { _controller: campaignchain.activity.controller.campaignchain.ezplatform.schedule:editModalAction }
 
 campaignchain_activity_ezplatform_schedule_edit_api:
-    pattern: /api/private/activity/ezplatform/schedule/byactivity/{id}/edit
+    path: /api/private/activity/ezplatform/schedule/byactivity/{id}/edit
     defaults: { _controller: campaignchain.activity.controller.campaignchain.ezplatform.schedule:editApiAction }
     options:
         expose: true
     
 campaignchain_activity_ezplatform_schedule_read:
-    pattern: /activity/ezplatform/schedule/{id}
+    path: /activity/ezplatform/schedule/{id}
     defaults: { _controller: campaignchain.activity.controller.campaignchain.ezplatform.schedule:readAction }
 
 campaignchain_activity_ezplatform_schedule_read_modal:
-    pattern: /modal/activity/ezplatform/schedule/{id}
+    path: /modal/activity/ezplatform/schedule/{id}
     defaults: { _controller: campaignchain.activity.controller.campaignchain.ezplatform.schedule:readModalAction }
     options:
         expose: true
