@@ -12,8 +12,8 @@
         }
     ],
     "require": {
-        "campaignchain/location-ezplatform": "dev-master",
-        "campaignchain/operation-ezplatform": "dev-master"
+        "campaignchain/location-ezplatform": "1.0.x-dev",
+        "campaignchain/operation-ezplatform": "1.0.x-dev"
     },
     "autoload": {
         "psr-4": { "CampaignChain\\Activity\\EZPlatformBundle\\": "" }
